@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Tracker</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" />
+    </head>
+
+<body>
+
+    <!-- Мобільний хедер -->
+    <div class="mobile-header">
+        <span class="mobile-title">Task Tracker</span>
+        <button class="hamburger" id="hamburger" onclick="toggleSidebar()" aria-label="Меню">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+
+    <!-- Оверлей для закриття сайдбара -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- Toast повідомлення -->
+    <div class="toast" id="toast">💾 Збережено</div>
+
+    <div class="dashboard">
+
+        <!-- SIDEBAR -->
+        <div class="sidebar" id="sidebar">
+            <div class="avatar-wrap">
+                <div class="avatar" id="avatarCircle">Hanna</div>
+                <div class="user-name" id="sidebarName">Sapunkova Hanna</div>
+                <div class="user-role">Targetologist</div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="date-block">
+                <div class="date-label">Сьогодні</div>
+                <div class="date-value" id="dateValue">—</div>
+                <div class="date-sub" id="dateSub">—</div>
+            </div>
+
+            <div class="stats-block">
+                <div class="stat-item">
+                    <span class="stat-label">Всього задач</span>
+                    <span class="stat-val" id="statTotal">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Виконано</span>
+                    <span class="stat-val green" id="statDone">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Прогрес</span>
+                    <span class="stat-val amber" id="statPct">0%</span>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">Всі права захищені &copy; 2026</div>
+        </div>
+
+        <!-- MAIN -->
+        <div class="main">
+            <div class="top-bar">
+                <div class="top-title">Мої задачі</div>
+                <button class="add-task-btn" onclick="toggleAddForm()">
+                    <span class="plus">+</span> Нова задача
+                </button>
+            </div>
+
+            <div class="add-form" id="addForm">
+                <span style="font-size:18px">📝</span>
+                <input type="text" id="newTaskInput" placeholder="Назва задачі..." maxlength="60" />
+                <button class="confirm-btn" onclick="addTask()">Додати</button>
+                <button class="cancel-btn" onclick="toggleAddForm()">Скасувати</button>
+            </div>
+
+            <div class="task-list" id="taskList"></div>
+        </div>
+    </div>
+
+<script src="main.js"></script>
+</body>
+
+</html>
