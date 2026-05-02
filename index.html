@@ -77,7 +77,21 @@
                 <button class="cancel-btn" onclick="toggleAddForm()">Скасувати</button>
             </div>
 
-            <div class="task-list" id="taskList"></div>
+            <div class="content-wrapper">
+                <!-- Task cards -->
+                <div class="task-list" id="taskList"></div>
+
+                <!-- Today's Tracking Panel -->
+                <div class="today-panel">
+                    <div class="today-header">
+                        <div class="today-title">📅 Сьогодні</div>
+                        <div class="today-date" id="todayDate">—</div>
+                    </div>
+                    <div class="today-counter">Зараз позначено: <strong id="todayCount">0</strong></div>
+                    <div class="today-checklist" id="todayChecklist"></div>
+                    <button class="clear-today-btn" onclick="resetTodayMarks()">🔄 Очистити</button>
+                </div>
+            </div>
         </div>
     </div>
 
