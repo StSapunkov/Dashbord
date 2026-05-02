@@ -348,11 +348,21 @@ body {
     color: var(--neo-danger);
 }
 
+/* ── CONTENT WRAPPER (Tasks + Today Panel) ── */
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    min-width: 0;
+}
+
 /* ── TASK CARDS ── */
 .task-list {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    min-width: 0;
 }
 
 .task-card {
@@ -361,6 +371,10 @@ body {
     box-shadow: 7px 7px 14px var(--neo-shadow-dark), -7px -7px 14px var(--neo-shadow-light);
     padding: 20px 24px;
     transition: box-shadow .2s;
+}
+
+.task-card.task-completed {
+    box-shadow: 0 0 20px rgba(72, 187, 120, 0.4), 7px 7px 14px var(--neo-shadow-dark), -7px -7px 14px var(--neo-shadow-light);
 }
 
 .task-header {
@@ -395,6 +409,19 @@ body {
     color: var(--neo-text);
 }
 
+.today-mark-badge {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #48bb78;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+}
+
 .task-meta {
     display: flex;
     align-items: center;
@@ -413,6 +440,7 @@ body {
 
 .progress-pill.done {
     color: #48bb78;
+    font-weight: 700;
 }
 
 .chevron {
@@ -445,65 +473,23 @@ body {
     transition: width .3s ease;
 }
 
-.checkboxes-grid {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
+.task-info {
+    display: flex;
+    flex-direction: column;
     gap: 8px;
+    padding: 12px;
+    background: rgba(124, 131, 253, 0.05);
+    border-radius: 10px;
 }
 
-.neo-cb {
-    aspect-ratio: 1;
-    border-radius: 8px;
-    background: var(--neo-bg);
-    box-shadow: 3px 3px 6px var(--neo-shadow-dark), -3px -3px 6px var(--neo-shadow-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: box-shadow .15s;
-    position: relative;
-}
-
-.neo-cb input {
-    display: none;
-}
-
-.neo-cb .check-inner {
-    width: 14px;
-    height: 14px;
-    border-radius: 4px;
-    background: var(--neo-bg);
-    box-shadow: inset 2px 2px 4px var(--neo-shadow-dark), inset -2px -2px 4px var(--neo-shadow-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    color: transparent;
-    transition: all .15s;
-}
-
-.neo-cb input:checked~.check-inner {
-    background: var(--neo-accent);
-    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, .2);
-    color: white;
-}
-
-.neo-cb:active {
-    box-shadow: inset 2px 2px 5px var(--neo-shadow-dark), inset -2px -2px 5px var(--neo-shadow-light);
-}
-
-.cb-num {
-    font-size: 9px;
+.task-detail {
+    font-size: 12px;
     color: var(--neo-text-muted);
-    position: absolute;
-    bottom: 2px;
-    right: 4px;
-    line-height: 1;
 }
 
-.task-collapsed .checkboxes-grid,
-.task-collapsed .progress-track {
-    display: none;
+.task-detail strong {
+    color: var(--neo-accent);
+    font-weight: 600;
 }
 
 .delete-task-btn {
@@ -532,9 +518,153 @@ body {
     box-shadow: inset 4px 4px 10px var(--neo-shadow-dark), inset -4px -4px 10px var(--neo-shadow-light);
 }
 
+/* ── TODAY'S PANEL ── */
+.today-panel {
+    width: 280px;
+    flex-shrink: 0;
+    border-radius: 18px;
+    background: var(--neo-bg);
+    box-shadow: 7px 7px 14px var(--neo-shadow-dark), -7px -7px 14px var(--neo-shadow-light);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: calc(100vh - 48px - 40px);
+    overflow-y: auto;
+}
+
+.today-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-bottom: 2px solid var(--neo-accent);
+    padding-bottom: 12px;
+}
+
+.today-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--neo-text);
+}
+
+.today-date {
+    font-size: 12px;
+    color: var(--neo-text-muted);
+}
+
+.today-counter {
+    font-size: 14px;
+    color: var(--neo-text);
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(124, 131, 253, 0.1);
+    text-align: center;
+}
+
+.today-counter strong {
+    color: var(--neo-accent);
+    font-size: 16px;
+}
+
+.today-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.today-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: var(--neo-bg);
+    box-shadow: inset 2px 2px 5px var(--neo-shadow-dark), inset -2px -2px 5px var(--neo-shadow-light);
+    cursor: pointer;
+    transition: all .15s;
+}
+
+.today-item:hover {
+    box-shadow: 2px 2px 5px var(--neo-shadow-dark), -2px -2px 5px var(--neo-shadow-light);
+}
+
+.today-item input {
+    display: none;
+}
+
+.today-check-box {
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    background: var(--neo-bg);
+    box-shadow: inset 2px 2px 4px var(--neo-shadow-dark), inset -2px -2px 4px var(--neo-shadow-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .15s;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.today-item input:checked~.today-check-box {
+    background: #48bb78;
+    box-shadow: inset 1px 1px 3px rgba(0, 0, 0, .2);
+}
+
+.today-item input:checked~.today-check-box::after {
+    content: '✓';
+    color: white;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.today-task-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.today-task-name {
+    font-size: 13px;
+    color: var(--neo-text);
+    font-weight: 500;
+    flex: 1;
+    word-break: break-word;
+}
+
+.today-item input:checked~.today-task-name {
+    color: var(--neo-accent);
+    font-weight: 600;
+}
+
+.empty-today {
+    text-align: center;
+    color: var(--neo-text-muted);
+    font-size: 12px;
+    padding: 20px;
+}
+
+.clear-today-btn {
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    background: var(--neo-bg);
+    box-shadow: 3px 3px 6px var(--neo-shadow-dark), -3px -3px 6px var(--neo-shadow-light);
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--neo-amber);
+    transition: box-shadow .15s;
+}
+
+.clear-today-btn:active {
+    box-shadow: inset 2px 2px 5px var(--neo-shadow-dark), inset -2px -2px 5px var(--neo-shadow-light);
+}
+
 /* ════════════════════════════════
     MOBILE — 768px і менше
-  ════════════════════════════════ */
+   ════════════════════════════════ */
 @media (max-width: 768px) {
     .mobile-header {
         display: flex;
@@ -543,6 +673,7 @@ body {
     .dashboard {
         padding: 16px;
         gap: 0;
+        flex-direction: column;
     }
 
     /* Сайдбар як drawer */
@@ -556,6 +687,8 @@ body {
         z-index: 99;
         padding-top: 64px;
         transform: translateX(-100%);
+        max-height: 100vh;
+        overflow-y: auto;
     }
 
     .sidebar.open {
@@ -564,6 +697,20 @@ body {
 
     .main {
         width: 100%;
+    }
+
+    .content-wrapper {
+        flex-direction: column;
+    }
+
+    .task-list {
+        width: 100%;
+    }
+
+    .today-panel {
+        width: 100%;
+        max-height: auto;
+        max-height: 400px;
     }
 
     .top-bar {
@@ -610,29 +757,10 @@ body {
     .task-name {
         font-size: 14px;
     }
-
-    /* Чекбокси — 6 в ряд на мобілці */
-    .checkboxes-grid {
-        grid-template-columns: repeat(6, 1fr);
-        gap: 6px;
-    }
-
-    .cb-num {
-        font-size: 8px;
-    }
-
-    .neo-cb .check-inner {
-        width: 12px;
-        height: 12px;
-        font-size: 9px;
-    }
 }
 
 @media (max-width: 400px) {
-
-    /* Чекбокси — 5 в ряд на маленьких екранах */
-    .checkboxes-grid {
-        grid-template-columns: repeat(5, 1fr);
-        gap: 5px;
+    .today-panel {
+        max-height: 300px;
     }
 }
