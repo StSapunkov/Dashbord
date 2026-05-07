@@ -223,7 +223,7 @@ document.getElementById('newTaskInput').addEventListener('keydown', e => {
 /* ── Ініціалізація ── */
 const DEFAULT_TASKS = [
     { id: 1, name: 'Ранкова медитація', icon: '📌', completedCount: 0, completedDate: null, open: true },
-    { id: 2, name: 'Масаж обличч'я', icon: '💡', completedCount: 0, completedDate: null, open: false },
+    { id: 2, name: 'Масаж обличчя', icon: '💡', completedCount: 0, completedDate: null, open: false },
     { id: 3, name: 'Фізкультура', icon: '📊', completedCount: 0, completedDate: null, open: false },
 ];
 
